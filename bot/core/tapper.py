@@ -368,10 +368,12 @@ class Tapper:
 
                                 await asyncio.sleep(delay=cooldown_seconds)
 
-                            logger.info(
-                                f'{self.session_name} | Sleep 5s before upgrade <e>{coin_name}</e>'
-                            )
-                            await asyncio.sleep(delay=5)
+                            else:
+
+                                logger.info(
+                                    f'{self.session_name} | Sleep 5s before upgrade <e>{coin_name}</e>'
+                                )
+                                await asyncio.sleep(delay=5)
 
                             status, upgrades = await buy_upgrade(
                                 http_client=http_client, upgrade_id=upgrade_id
