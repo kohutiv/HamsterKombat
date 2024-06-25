@@ -345,15 +345,10 @@ class Tapper:
                                     )
 
                             if not queue:
-                                logger.info(
-                                    f'{self.session_name} | <r>Не знайдено доступних карточок!</r>'
-                                )
                                 continue
 
                             top_card = heapq.nsmallest(1, queue)[0]
-
                             upgrade = top_card[2]
-
                             upgrade_id = upgrade['id']
                             level = upgrade['level']
                             price = upgrade['price']
@@ -365,11 +360,8 @@ class Tapper:
                                 logger.info(
                                     f'{self.session_name} | Sleep {cooldown_seconds:,}s before upgrade <e>{coin_name}</e>'
                                 )
-
                                 await asyncio.sleep(delay=cooldown_seconds)
-
                             else:
-
                                 logger.info(
                                     f'{self.session_name} | Sleep 5s before upgrade <e>{coin_name}</e>'
                                 )
@@ -444,7 +436,7 @@ class Tapper:
                             f'{self.session_name} | Minimum energy reached: <y>{available_energy}</y>'
                         )
                         logger.info(
-                            f'{self.session_name} | Sleep {random_sleep:,}s'
+                            f'{self.session_name} | Sleep {random_sleep:,}'
                         )
 
                         await asyncio.sleep(delay=random_sleep)
