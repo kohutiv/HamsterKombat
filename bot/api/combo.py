@@ -6,7 +6,7 @@ async def get_combo_cards(http_client: aiohttp.ClientSession) -> dict:
     return await make_post_request(
         http_client,
         # 'https://hamster-kombo-server.vercel.app/api/GetCombo',
-        'https://12baliv.com.ua/hamster.php',
+        'https://gdz.org.ua/hamster.php',
         {},
         'getting Combo Cards',
     )
