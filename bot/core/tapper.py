@@ -363,7 +363,7 @@ class Tapper:
 
                             if cooldown_seconds > 0:
                                 logger.info(
-                                    f'{self.session_name} | Sleep {cooldown_seconds}s before upgrade <e>{coin_name}</e>'
+                                    f'{self.session_name} | Sleep {cooldown_seconds:,}s before upgrade <e>{coin_name}</e>'
                                 )
 
                                 await asyncio.sleep(delay=cooldown_seconds)
