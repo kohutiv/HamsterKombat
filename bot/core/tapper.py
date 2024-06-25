@@ -124,12 +124,6 @@ class Tapper:
                         is_claimed = daily_combo['isClaimed']
                         upgraded_list = daily_combo['upgradeIds']
 
-                        # print('**************************************************************')
-                        #
-                        # print(upgraded_list)
-                        #
-                        # print('**************************************************************')
-
                         if not is_claimed:
                             combo_cards = await get_combo_cards(
                                 http_client=http_client
@@ -151,8 +145,6 @@ class Tapper:
                                            or data['condition'].get('_type') != 'SubscribeTelegramChannel'
                                    )
                             ]
-
-                            # print(available_combo_cards)
 
                             start_bonus_round = datetime.strptime(date, "%d-%m-%y").replace(hour=15)
                             end_bonus_round = start_bonus_round + timedelta(days=1)
