@@ -110,9 +110,9 @@ class Tapper:
                         http_client=http_client
                     )
 
-                    frequency = 470  # Set Frequency To 2500 Hertz
-                    duration = 500  # Set Duration To 1000 ms == 1 second
-                    winsound.Beep(frequency, duration)
+                    # frequency = 470  # Set Frequency To 2500 Hertz
+                    # duration = 500  # Set Duration To 1000 ms == 1 second
+                    # winsound.Beep(frequency, duration)
 
                     last_passive_earn = profile_data['lastPassiveEarn']
                     earn_on_hour = profile_data['earnPassivePerHour']
