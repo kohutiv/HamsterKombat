@@ -413,7 +413,6 @@ class Tapper:
                                 )
 
                                 await asyncio.sleep(delay=1)
-
                                 continue
 
                         await http_client.close()
