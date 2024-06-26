@@ -130,6 +130,7 @@ class Tapper:
                             )
 
                             cards = combo_cards['combo']
+
                             date = combo_cards['date']
 
                             available_combo_cards = [
@@ -140,10 +141,10 @@ class Tapper:
                                    and data['isExpired'] is False
                                    and data.get('cooldownSeconds', 0) == 0
                                    and data.get('maxLevel', data['level']) >= data['level']
-                                   and (
-                                           data.get('condition') is None
-                                           or data['condition'].get('_type') != 'SubscribeTelegramChannel'
-                                   )
+                                   # and (
+                                   #         data.get('condition') is None
+                                   #         or data['condition'].get('_type') != 'SubscribeTelegramChannel'
+                                   # )
                             ]
 
                             start_bonus_round = datetime.strptime(date, "%d-%m-%y").replace(hour=15)
@@ -152,8 +153,15 @@ class Tapper:
                             if start_bonus_round <= datetime.now() < end_bonus_round:
                                 common_price = sum([upgrade['price'] for upgrade in available_combo_cards])
                                 need_cards_count = len(cards)
+
+                                # print(f'need_cards_count: {need_cards_count}')
+
                                 possible_cards_count = len(available_combo_cards)
+
+                                # print(f'possible_cards_count: {possible_cards_count}')
+
                                 upgraded_combo_card = len(upgraded_list)
+
                                 is_combo_accessible = need_cards_count == possible_cards_count + upgraded_combo_card
 
                                 if not is_combo_accessible:
@@ -163,6 +171,8 @@ class Tapper:
                                 if balance < common_price:
                                     logger.info(f"{self.session_name} | "
                                                 f"<r>Daily combo is not applicable</r>, you don't have enough coins. Need <y>{common_price:,}</y> coins, but your balance is <r>{balance:,}</r> coins")
+
+                                print(f'common_price {common_price}')
 
                                 if common_price < bonus and balance > common_price and is_combo_accessible:
                                     for upgrade in available_combo_cards:
@@ -303,11 +313,11 @@ class Tapper:
                                    and data.get('cooldownSeconds', 0) == 0
                                    and data.get('maxLevel', data['level'])
                                    >= data['level']
-                                   # and (
-                                   #         data.get('condition') is None
-                                   #         or data['condition'].get('_type')
-                                   #         == 'SubscribeTelegramChannel'
-                                   # )
+                                # and (
+                                #         data.get('condition') is None
+                                #         or data['condition'].get('_type')
+                                #         == 'SubscribeTelegramChannel'
+                                # )
                             ]
 
                             queue = []
