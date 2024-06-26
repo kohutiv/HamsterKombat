@@ -303,11 +303,11 @@ class Tapper:
                                    # and data.get('cooldownSeconds', 0) == 0
                                    and data.get('maxLevel', data['level'])
                                    >= data['level']
-                                   and (
-                                           data.get('condition') is None
-                                           or data['condition'].get('_type')
-                                           == 'SubscribeTelegramChannel'
-                                   )
+                                   # and (
+                                   #         data.get('condition') is None
+                                   #         or data['condition'].get('_type')
+                                   #         == 'SubscribeTelegramChannel'
+                                   # )
                             ]
 
                             queue = []
@@ -350,7 +350,7 @@ class Tapper:
 
                             if cooldown_seconds > 0:
                                 logger.info(
-                                    f'{self.session_name} | Sleep {cooldown_seconds:,}s before upgrade <e>{coin_name}</e>'
+                                    f'{self.session_name} | Sleep {cooldown_seconds + 12:,}s before upgrade <e>{coin_name}</e>'
                                 )
                                 await asyncio.sleep(delay=cooldown_seconds + 12)
                             else:
