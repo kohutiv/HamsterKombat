@@ -450,7 +450,7 @@ class Tapper:
                             f'{self.session_name} | Minimum energy reached: <y>{available_energy}</y>'
                         )
                         logger.info(
-                            f'{self.session_name} | Sleep {random_sleep:,}'
+                            f'{self.session_name} | Sleep {random_sleep:,}s'
                         )
 
                         await asyncio.sleep(delay=random_sleep)
