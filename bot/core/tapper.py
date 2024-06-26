@@ -172,7 +172,7 @@ class Tapper:
                                     logger.info(f"{self.session_name} | "
                                                 f"<r>Daily combo is not applicable</r>, you don't have enough coins. Need <y>{common_price:,}</y> coins, but your balance is <r>{balance:,}</r> coins")
 
-                                print(f'common_price {common_price}')
+                                # print(f'common_price {common_price}')
 
                                 if common_price < bonus and balance > common_price and is_combo_accessible:
                                     for upgrade in available_combo_cards:
