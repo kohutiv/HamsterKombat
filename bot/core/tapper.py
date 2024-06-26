@@ -1,4 +1,5 @@
 import asyncio
+import winsound
 import heapq
 from random import randint
 from time import time, sleep
@@ -65,16 +66,24 @@ class Tapper:
         while True:
             try:
                 if http_client.closed:
-                    if proxy_conn:
-                        if not proxy_conn.closed:
-                            proxy_conn.close()
 
+                    # print(1)
+
+                    if proxy_conn:
+                        # print(2)
+                        if not proxy_conn.closed:
+                            # print(3)
+                            proxy_conn.close()
+                    # print(4)
                     proxy_conn = (
                         ProxyConnector().from_url(proxy) if proxy else None
                     )
                     http_client = aiohttp.ClientSession(
                         headers=headers, connector=proxy_conn
                     )
+                    # print(5)
+
+                # print(6)
 
                 if time() - access_token_created_time >= 3600:
                     await get_nuxt_builds(http_client=http_client)
@@ -100,6 +109,10 @@ class Tapper:
                     profile_data = await get_profile_data(
                         http_client=http_client
                     )
+
+                    frequency = 470  # Set Frequency To 2500 Hertz
+                    duration = 500  # Set Duration To 1000 ms == 1 second
+                    winsound.Beep(frequency, duration)
 
                     last_passive_earn = profile_data['lastPassiveEarn']
                     earn_on_hour = profile_data['earnPassivePerHour']
@@ -141,10 +154,10 @@ class Tapper:
                                    and data['isExpired'] is False
                                    and data.get('cooldownSeconds', 0) == 0
                                    and data.get('maxLevel', data['level']) >= data['level']
-                                   # and (
-                                   #         data.get('condition') is None
-                                   #         or data['condition'].get('_type') != 'SubscribeTelegramChannel'
-                                   # )
+                                # and (
+                                #         data.get('condition') is None
+                                #         or data['condition'].get('_type') != 'SubscribeTelegramChannel'
+                                # )
                             ]
 
                             start_bonus_round = datetime.strptime(date, "%d-%m-%y").replace(hour=15)
@@ -310,7 +323,7 @@ class Tapper:
                                 for data in upgrades
                                 if data['isAvailable'] is True
                                    and data['isExpired'] is False
-                                   and data.get('cooldownSeconds', 0) == 0
+                                   # and data.get('cooldownSeconds', 0) == 0
                                    and data.get('maxLevel', data['level'])
                                    >= data['level']
                                 # and (
@@ -355,18 +368,18 @@ class Tapper:
                             price = upgrade['price']
                             profit = upgrade['profitPerHourDelta']
                             coin_name = upgrade['name']
-                            # cooldown_seconds = upgrade.get('cooldownSeconds', 0)
+                            cooldown_seconds = upgrade.get('cooldownSeconds', 0)
 
-                            # if cooldown_seconds > 0:
-                            #     logger.info(f'{self.session_name} | Sleep {cooldown_seconds + 12:,}s before upgrade <e>{coin_name}</e>')
-                            #
-                            #     await asyncio.sleep(delay=cooldown_seconds + 12)
-                            #
-                            # else:
+                            if cooldown_seconds > 0 and cooldown_seconds < 7200:
+                                logger.info(f'{self.session_name} | Sleep {cooldown_seconds + 12:,}s before upgrade <e>{coin_name}</e>')
 
-                            logger.info(
-                                f'{self.session_name} | Sleep 5s before upgrade <e>{coin_name}</e>'
-                            )
+                                await asyncio.sleep(delay=cooldown_seconds + 12)
+
+                            else:
+
+                                logger.info(
+                                    f'{self.session_name} | Sleep 5s before upgrade <e>{coin_name}</e>'
+                                )
 
                             await asyncio.sleep(delay=5)
 
