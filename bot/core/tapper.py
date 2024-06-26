@@ -1,5 +1,4 @@
 import asyncio
-import winsound
 import heapq
 from random import randint
 from time import time, sleep
