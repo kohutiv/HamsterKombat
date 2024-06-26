@@ -321,7 +321,6 @@ class Tapper:
                                 significance = profit / max(price, 1)
 
                                 free_money = balance - settings.BALANCE_TO_SAVE
-
                                 max_price_limit = earn_on_hour * 5
 
                                 if (
