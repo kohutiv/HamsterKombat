@@ -348,12 +348,17 @@ class Tapper:
                             coin_name = upgrade['name']
                             # cooldown_seconds = upgrade.get('cooldownSeconds', 0)
 
-                            # if cooldown_seconds > 0: logger.info( f'{self.session_name} | Sleep {cooldown_seconds +
-                            # 12:,}s before upgrade <e>{coin_name}</e>' ) await asyncio.sleep(delay=cooldown_seconds
-                            # + 12) else:
+                            # if cooldown_seconds > 0:
+                            #     logger.info(f'{self.session_name} | Sleep {cooldown_seconds + 12:,}s before upgrade <e>{coin_name}</e>')
+                            #
+                            #     await asyncio.sleep(delay=cooldown_seconds + 12)
+                            #
+                            # else:
+
                             logger.info(
                                 f'{self.session_name} | Sleep 5s before upgrade <e>{coin_name}</e>'
                             )
+
                             await asyncio.sleep(delay=5)
 
                             status, upgrades = await buy_upgrade(
