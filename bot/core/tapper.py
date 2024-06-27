@@ -377,7 +377,7 @@ class Tapper:
                                 )
                                 await asyncio.sleep(delay=5)
 
-                            elif cooldown_seconds < 3601:
+                            elif cooldown_seconds < 3601 and settings.UPGRADE_COOLDOWN_CARDS:
                                 logger.info(
                                     f'{self.session_name} | Sleep {cooldown_seconds + 12:,}s before upgrade <e>{coin_name}</e>')
 

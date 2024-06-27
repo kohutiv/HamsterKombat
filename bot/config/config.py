@@ -30,5 +30,7 @@ class Settings(BaseSettings):
 
     USE_PROXY_FROM_FILE: bool = False
 
+    UPGRADE_COOLDOWN_CARDS: bool = False
+
 
 settings = Settings()
