@@ -369,8 +369,6 @@ class Tapper:
                             coin_name = upgrade['name']
                             cooldown_seconds = upgrade.get('cooldownSeconds', 0)
 
-                            print('cooldown_seconds: ', cooldown_seconds)
-
                             if not cooldown_seconds:
                                 logger.info(
                                     f'{self.session_name} | Sleep 5s before upgrade <e>{coin_name}</e>'
