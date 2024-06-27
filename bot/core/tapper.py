@@ -322,7 +322,7 @@ class Tapper:
                                 for data in upgrades
                                 if data['isAvailable'] is True
                                    and data['isExpired'] is False
-                                   and data.get('cooldownSeconds', 0) == 0
+                                   # and data.get('cooldownSeconds', 0) == 0
                                    and data.get('maxLevel', data['level'])
                                    >= data['level']
                                 # and (
@@ -367,19 +367,24 @@ class Tapper:
                             price = upgrade['price']
                             profit = upgrade['profitPerHourDelta']
                             coin_name = upgrade['name']
-                            # cooldown_seconds = upgrade.get('cooldownSeconds', 0)
+                            cooldown_seconds = upgrade.get('cooldownSeconds', 0)
 
-                            # if cooldown_seconds > 0 and cooldown_seconds < 3601:
-                            #     logger.info(f'{self.session_name} | Sleep {cooldown_seconds + 12:,}s before upgrade <e>{coin_name}</e>')
-                            #
-                            #     await asyncio.sleep(delay=cooldown_seconds + 12)
-                            #
-                            # else:
-                            logger.info(
-                                f'{self.session_name} | Sleep 5s before upgrade <e>{coin_name}</e>'
-                            )
+                            print('cooldown_seconds: ', cooldown_seconds)
 
-                            await asyncio.sleep(delay=5)
+                            if not cooldown_seconds:
+                                logger.info(
+                                    f'{self.session_name} | Sleep 5s before upgrade <e>{coin_name}</e>'
+                                )
+                                await asyncio.sleep(delay=5)
+
+                            elif cooldown_seconds < 3601:
+                                logger.info(
+                                    f'{self.session_name} | Sleep {cooldown_seconds + 12:,}s before upgrade <e>{coin_name}</e>')
+
+                                await asyncio.sleep(delay=cooldown_seconds + 12)
+
+                            else:
+                                continue
 
                             status, upgrades = await buy_upgrade(
                                 http_client=http_client, upgrade_id=upgrade_id
