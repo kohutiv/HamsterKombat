@@ -166,11 +166,7 @@ class Tapper:
                                 common_price = sum([upgrade['price'] for upgrade in available_combo_cards])
                                 need_cards_count = len(cards)
 
-                                # print(f'need_cards_count: {need_cards_count}')
-
                                 possible_cards_count = len(available_combo_cards)
-
-                                # print(f'possible_cards_count: {possible_cards_count}')
 
                                 upgraded_combo_card = len(upgraded_list)
 
@@ -184,16 +180,18 @@ class Tapper:
                                     logger.info(f"{self.session_name} | "
                                                 f"<r>Daily combo is not applicable</r>, you don't have enough coins. Need <y>{common_price:,}</y> coins, but your balance is <r>{balance:,}</r> coins")
 
-                                logger.info(f"{self.session_name} | "
-                                            f"Daily combo price: <r>{common_price:,}.</r> Your balance is <r>{balance:,}</r> coins")
 
-                                if balance > common_price and is_combo_accessible:
+                                if balance < common_price:
+                                    logger.info(f"{self.session_name} | "
+                                                f"Daily combo price: <r>{common_price:,}</r> coins, but your balance is <r>{balance:,}</r> coins")
+
+
+                                if common_price < bonus and balance > common_price and is_combo_accessible:
                                     for upgrade in available_combo_cards:
                                         upgrade_id = upgrade['id']
                                         level = upgrade['level']
                                         price = upgrade['price']
                                         profit = upgrade['profitPerHourDelta']
-
 
                                         logger.info(
                                             f'{self.session_name} | '
@@ -216,6 +214,7 @@ class Tapper:
                                                 f'Earn every hour: <y>{earn_on_hour:,}</y> (<g>+{profit:,}</g>) | '
                                                 f'Money left: <e>{balance:,}</e>'
                                             )
+
                                             await asyncio.sleep(delay=1)
 
                                     await asyncio.sleep(delay=2)
