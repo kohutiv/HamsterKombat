@@ -349,7 +349,7 @@ class Tapper:
                                         (free_money * 0.7) >= price
                                         and level <= settings.MAX_LEVEL
                                         and profit > 0
-                                        and significance <= 0.0003
+                                        and significance >= 0.0003
                                         # and price < settings.MAX_PRICE_LIMIT
                                         and price < max_price_limit
                                 ):
