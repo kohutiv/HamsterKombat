@@ -216,7 +216,6 @@ class Tapper:
                                                 f'Earn every hour: <y>{earn_on_hour:,}</y> (<g>+{profit:,}</g>) | '
                                                 f'Money left: <e>{balance:,}</e>'
                                             )
-
                                             await asyncio.sleep(delay=1)
 
                                     await asyncio.sleep(delay=2)
