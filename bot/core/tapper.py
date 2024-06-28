@@ -184,6 +184,23 @@ class Tapper:
                                     logger.info(f"{self.session_name} | "
                                                 f"<r>Daily combo is not applicable</r>, you don't have enough coins. Need <y>{common_price:,}</y> coins, but your balance is <r>{balance:,}</r> coins")
 
+
+
+                                logger.info(f"{self.session_name} | "
+                                            f"Daily combo price: <r>{common_price:,}.</r> Your balance is <r>{balance:,}</r> coins")
+
+
+
+                                buy = input("Buy combo cards? (yes for buy)")
+
+
+
+
+
+
+
+
+
                                 # print(f'common_price {common_price}')
 
                                 if common_price < bonus and balance > common_price and is_combo_accessible:
@@ -192,6 +209,18 @@ class Tapper:
                                         level = upgrade['level']
                                         price = upgrade['price']
                                         profit = upgrade['profitPerHourDelta']
+
+                                        logger.info(f"{self.session_name} | "
+                                                    f"Daily combo price: <r>{common_price:,}.<r> Your balance is <r>{balance:,}</r> coins")
+
+                                        print('*' * 50)
+                                        buy = input("<r>Buy combo cards?</r> <i>(yes for buy):</i>  ")
+                                        print('*' * 50)
+
+                                        if buy != 'yes':
+                                            break
+
+
 
                                         logger.info(
                                             f'{self.session_name} | '
