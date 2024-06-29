@@ -185,7 +185,7 @@ class Tapper:
                                                 f"Daily combo price: <r>{common_price:,}</r> coins, but your balance is <r>{balance:,}</r> coins")
 
 
-                                if common_price < bonus and balance > common_price and is_combo_accessible:
+                                if common_price <= (bonus * 2) and balance > common_price and is_combo_accessible:
                                     for upgrade in available_combo_cards:
                                         upgrade_id = upgrade['id']
                                         level = upgrade['level']
