@@ -109,9 +109,6 @@ class Tapper:
                         http_client=http_client
                     )
 
-                    # frequency = 470  # Set Frequency To 2500 Hertz
-                    # duration = 500  # Set Duration To 1000 ms == 1 second
-                    # winsound.Beep(frequency, duration)
 
                     last_passive_earn = profile_data['lastPassiveEarn']
                     earn_on_hour = profile_data['earnPassivePerHour']
@@ -171,6 +168,8 @@ class Tapper:
                                 upgraded_combo_card = len(upgraded_list)
 
                                 is_combo_accessible = need_cards_count == possible_cards_count + upgraded_combo_card
+
+                                print('common_price ', common_price)
 
                                 if not is_combo_accessible:
                                     logger.info(f"{self.session_name} | "
